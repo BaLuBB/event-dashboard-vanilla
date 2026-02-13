@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Event Dashboard - Veranstaltungsverwaltung mit Vanilla JavaScript">
+    <meta name="author" content="BaLuBB">
+    <title>🎪 Event Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <h1>🎪 <span id="header-title">Event Dashboard</span></h1>
+        </div>
+        <div class="header-controls">
+            <!-- Navigation -->
+            <nav class="app-nav">
+                <button class="nav-btn active" data-view="events" id="nav-events">Veranstaltungen</button>
+                <button class="nav-btn" data-view="dashboard" id="nav-dashboard">Dashboard</button>
+            </nav>
+            <!-- Sprachenwechsler -->
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="de">🇩🇪 DE</button>
+                <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-main">
+        <!-- Loading State -->
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p id="loading-text">Lädt...</p>
+        </div>
+
+        <!-- Events View -->
+        <section id="view-events" class="view active">
+            <div class="section-header">
+                <h2 id="events-title">Veranstaltungen</h2>
+                <button class="btn-primary" id="btn-create-event">
+                    <span id="btn-create-text">+ Erstellen</span>
+                </button>
+            </div>
+            <div id="events-grid" class="events-grid">
+                <!-- Events werden hier dynamisch eingefügt -->
+            </div>
+            <p id="no-events" class="no-data hidden">Keine Veranstaltungen gefunden</p>
+        </section>
+
+        <!-- Dashboard View -->
+        <section id="view-dashboard" class="view">
+            <h2 id="dashboard-title">Dashboard</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 id="stat-total-label">Gesamt Events</h3>
+                    <p class="stat-number" id="stat-total">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="stat-planned-label">Geplant</h3>
+                    <p class="stat-number" id="stat-planned">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="stat-confirmed-label">Bestätigt</h3>
+                    <p class="stat-number" id="stat-confirmed">0</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal für Event erstellen/bearbeiten -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Event erstellen</h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <form id="event-form">
+                <div class="form-group">
+                    <label for="event-title" id="label-title">Titel</label>
+                    <input type="text" id="event-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-start" id="label-start">Startdatum</label>
+                    <input type="date" id="event-start" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-end" id="label-end">Enddatum</label>
+                    <input type="date" id="event-end" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-location" id="label-location">Ort</label>
+                    <input type="text" id="event-location" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-status" id="label-status">Status</label>
+                    <select id="event-status">
+                        <option value="planned" id="status-planned">Geplant</option>
+                        <option value="confirmed" id="status-confirmed">Bestätigt</option>
+                        <option value="cancelled" id="status-cancelled">Abgesagt</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="btn-cancel">Abbrechen</button>
+                    <button type="submit" class="btn-primary" id="btn-save">Speichern</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/translations.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
